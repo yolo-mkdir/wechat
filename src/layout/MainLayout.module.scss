@@ -1,0 +1,112 @@
+/* 最外层容器：三栏式布局 + 阴影 */
+.container {
+  display: flex;
+  height: 100vh;
+  box-shadow: 0 0 16px rgba(0, 0, 0, 0.15);
+  background-color: #f1f1f1;
+}
+
+/* 左侧图标栏（蓝色区域） */
+.sidebar {
+  width: 60px;
+  background-color: #2e2e2e;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 12px 0;
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 16px;
+  cursor: pointer;
+}
+
+.iconList {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: center;
+}
+
+.icon {
+  width: 24px;
+  height: 24px;
+  opacity: 0.7;
+  cursor: pointer;
+  transition: opacity 0.2s;
+
+  &:hover {
+    opacity: 1;
+  }
+}
+
+/* 中间联系人区域（红色区域） */
+.contactList {
+  width: 260px;
+  background-color: #f4f4f4;
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid #ccc;
+}
+
+/* 搜索栏 */
+.searchBar {
+  display: flex;
+  align-items: center;
+  padding: 8px;
+  background: #fff;
+  border-bottom: 1px solid #ddd;
+}
+
+.searchBar input {
+  flex: 1;
+  padding: 6px 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.searchBar button {
+  margin-left: 6px;
+  background: #fff;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+/* 联系人项（只保留一栏） */
+.contactItem {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  cursor: pointer;
+  border-bottom: 1px solid #eee;
+  background: #e3e3e3;
+  transition: background-color 0.2s;
+
+  &:hover {
+    background-color: #ddd;
+  }
+}
+
+.contactItem img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.contactText {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+/* 右侧聊天区域（绿色区域） */
+.chatArea {
+  flex: 1;
+  background-color: #fff;
+  overflow: hidden;
+}

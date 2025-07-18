@@ -1,0 +1,47 @@
+/* src/layout/WeChatLayout.module.scss */
+.container {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  background-color: #e5e5e5;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.chatList {
+  width: 240px;
+  background-color: #f7f7f7;
+  padding: 12px 0;
+  box-shadow: 2px 0 6px rgba(0, 0, 0, 0.08);
+}
+
+.userItem {
+  display: flex;
+  align-items: center;
+  padding: 10px 16px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+
+  &:hover {
+    background-color: #e6e6e6;
+  }
+}
+
+.userAvatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 10px;
+}
+
+.username {
+  font-weight: bold;
+  font-size: 16px;
+  color: #333;
+}
+
+.chatArea {
+  flex: 1;
+  background-color: #fff;
+  overflow: auto;
+}

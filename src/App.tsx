@@ -1,7 +1,7 @@
-import { Outlet } from 'react-router-dom'
-
+// src/App.tsx
+import WeChatLayout from './layout/WeChatLayout'
 function App() {
-  return <Outlet />
+  return <WeChatLayout onSelectUser={() => { }} />
 }
 
 export default App
