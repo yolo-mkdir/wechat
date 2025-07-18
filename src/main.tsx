@@ -2,24 +2,40 @@ import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom"
+import { createRoot } from "react-dom/client"
 import App from "./App"
-import Home from "./Home"
-import ErrorPage from "./ErrorPage"
+import { lazy, Suspense, type ComponentType } from "react"
+
+const lazyLoad = (dynamicImport: () => Promise<{ default: ComponentType<any> }>) => {
+  const Component = lazy(dynamicImport)
+  return (
+    <Suspense fallback={null}>
+      <Component />
+    </Suspense>
+  )
+}
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
-    errorElement: <ErrorPage />,
     children: [
       {
         index: true,
-        element: <Home />,
+        element: lazyLoad(() => import("./pages/Home")),
+      },
+      {
+        path: "about",
+        element: lazyLoad(() => import("./pages/About")),
       },
     ],
   },
 ])
 
-ReactDOM.createRoot(document.getElementById("root")).render(
-  <RouterProvider router={router} />
-)
+const container = document.getElementById("root")
+if (container) {
+  const root = createRoot(container)
+  root.render(
+    <RouterProvider router={router} />
+  )
+}
