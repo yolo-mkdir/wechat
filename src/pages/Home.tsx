@@ -1,11 +1,10 @@
 import { useEffect, useRef, useState } from 'react'
-import styles from '../style.module.scss'
 import ChatWindow from '../components/ChatWindow'
-import back from '../assets/后退.png'
-import dot from '../assets/点.png'
-import emoji from '../assets/笑脸.png'
-import plus from '../assets/加号.png'
-import voice from '../assets/语音.png'
+
+// 本地图标
+import voiceIcon from '../assets/语音.png'
+import emojiIcon from '../assets/笑脸.png'
+import plusIcon from '../assets/加号.png'
 
 type Message = {
   text: string
@@ -32,37 +31,52 @@ export default function Home() {
   }, [messages])
 
   return (
-    <div className={styles.chat_wrapper}>
-      {/* 顶部栏 */}
-      <div className={styles.row}>
-        <span className={styles.icon_wrapper}>
-          <img src={back} className="img" alt="后退" />
-        </span>
-        <span className={styles.title}>用户1</span>
-        <span className={styles.icon_wrapper}>
-          <img src={dot} className="img" alt="点" />
-        </span>
+    <>
+      {/* 聊天消息区 */}
+      <div
+        ref={chatAreaRef}
+        style={{
+          flex: 1,
+          height: '100%',
+          overflowY: 'auto',
+          padding: '12px 16px',
+          backgroundColor: '#fff'
+        }}
+      >
+        <ChatWindow messages={messages} />
       </div>
 
-      {/* 中间聊天区域 */}
-      <section ref={chatAreaRef} className={styles.chat_section}>
-        <ChatWindow messages={messages} />
-      </section>
-
-      {/* 底部输入区域 */}
-      <div className={styles.input_area}>
-        <img src={voice} className={styles.icon_img} alt="语音" />
+      {/* 输入框区域 */}
+      <div
+        style={{
+          height: '50px',
+          backgroundColor: '#18191a',
+          display: 'flex',
+          alignItems: 'center',
+          padding: '0 12px',
+          color: 'white'
+        }}
+      >
+        <img src={voiceIcon} alt="语音" style={{ width: 20, height: 20 }} />
         <input
           type="text"
           placeholder="请输入..."
           value={input}
           onChange={(e) => setInput(e.target.value)}
-          className={styles.input_box}
           onKeyDown={(e) => e.key === 'Enter' && sendMessage()}
+          style={{
+            flex: 1,
+            height: '28px',
+            margin: '0 10px',
+            padding: '4px 8px',
+            borderRadius: '6px',
+            border: 'none',
+            outline: 'none'
+          }}
         />
-        <img src={emoji} className={styles.icon_img} alt="表情" />
-        <img src={plus} className={styles.icon_img} alt="加号" />
+        <img src={emojiIcon} alt="表情" style={{ width: 20, height: 20, marginLeft: 6 }} />
+        <img src={plusIcon} alt="加号" style={{ width: 20, height: 20, marginLeft: 6 }} />
       </div>
-    </div>
+    </>
   )
 }

@@ -1,11 +1,15 @@
-/* src/layout/WeChatLayout.module.scss */
 .container {
   display: flex;
   height: 100vh;
-  width: 100vw;
+  width: 66.6vw;           // 居中显示，三分之二宽度
+  margin: auto;
   background-color: #e5e5e5;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  overflow: hidden;
 }
+
+/* 左侧侧边栏你应该已经有样式了，这里略 */
 
 .chatList {
   width: 240px;
@@ -42,6 +46,71 @@
 
 .chatArea {
   flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden; // 防止向外扩展
   background-color: #fff;
-  overflow: auto;
+}
+
+.chatWrapper {
+  display: flex;
+  flex-direction: column;
+  flex: 1;                  // 原本是 height: 100% 改为占满剩余空间
+  overflow: hidden;
+  background-color: #fff;   // 你想要的背景（不再包一块框）
+}
+
+/* 顶部栏 */
+.chatHeader {
+  height: 50px;
+  background-color: #18191a;
+  color: white;
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  justify-content: space-between;
+}
+
+.backBtn {
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.chatTitle {
+  flex: 1;
+  text-align: center;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.chatMenu {
+  font-size: 18px;
+  cursor: default;
+}
+
+/* 聊天消息区域样式建议在 ChatWindow 组件内控制 */
+
+/* 底部输入栏 */
+.chatInputBar {
+  height: 50px;
+  background-color: #18191a;
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
+  color: white;
+}
+
+.chatInput {
+  flex: 1;
+  height: 28px;
+  margin: 0 10px;
+  padding: 4px 8px;
+  border-radius: 6px;
+  border: none;
+  outline: none;
+}
+
+.icon {
+  font-size: 18px;
+  cursor: pointer;
 }
