@@ -5,7 +5,6 @@ import styles from './WeChatLayout.module.scss'
 import Home from '../pages/Home'
 import { useState } from 'react'
 
-// 本地图标
 import voiceIcon from '../assets/语音.png'
 import emojiIcon from '../assets/笑脸.png'
 import plusIcon from '../assets/加号.png'
