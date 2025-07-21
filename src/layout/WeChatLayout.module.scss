@@ -1,7 +1,7 @@
 .container {
   display: flex;
   height: 100vh;
-  width: 66.6vw;           // 居中显示，三分之二宽度
+  width: 66.6vw; /* 居中显示，三分之二宽度 */
   margin: auto;
   background-color: #e5e5e5;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
@@ -9,8 +9,7 @@
   overflow: hidden;
 }
 
-/* 左侧侧边栏你应该已经有样式了，这里略 */
-
+/* 左侧联系人栏 */
 .chatList {
   width: 240px;
   background-color: #f7f7f7;
@@ -44,20 +43,22 @@
   color: #333;
 }
 
+/* 右侧聊天区域容器 */
 .chatArea {
   flex: 1;
   display: flex;
   flex-direction: column;
-  overflow: hidden; // 防止向外扩展
+  overflow: hidden;
   background-color: #fff;
 }
 
+/* 包含 header、消息区、输入框 */
 .chatWrapper {
+  flex: 1;
   display: flex;
   flex-direction: column;
-  flex: 1;                  // 原本是 height: 100% 改为占满剩余空间
   overflow: hidden;
-  background-color: #fff;   // 你想要的背景（不再包一块框）
+  background-color: #fff;
 }
 
 /* 顶部栏 */
@@ -88,9 +89,7 @@
   cursor: default;
 }
 
-/* 聊天消息区域样式建议在 ChatWindow 组件内控制 */
-
-/* 底部输入栏 */
+/* 输入栏区域 */
 .chatInputBar {
   height: 50px;
   background-color: #18191a;
@@ -100,6 +99,7 @@
   color: white;
 }
 
+/* 输入框样式 */
 .chatInput {
   flex: 1;
   height: 28px;
@@ -110,7 +110,9 @@
   outline: none;
 }
 
+/* 图标样式（可选） */
 .icon {
-  font-size: 18px;
+  width: 20px;
+  height: 20px;
   cursor: pointer;
 }
