@@ -1,15 +1,16 @@
+// src/main.tsx
+import { createRoot } from 'react-dom/client'
 import {
   createBrowserRouter,
   RouterProvider,
-} from "react-router-dom"
-import { createRoot } from "react-dom/client"
-import App from "./App"
-import { lazy, Suspense, type ComponentType } from "react"
+} from 'react-router-dom'
+import { lazy, Suspense, type ComponentType } from 'react'
+import App from './App'
 
-const lazyLoad = (dynamicImport: () => Promise<{ default: ComponentType<any> }>) => {
-  const Component = lazy(dynamicImport)
+const lazyLoad = (loader: () => Promise<{ default: ComponentType<any> }>) => {
+  const Component = lazy(loader)
   return (
-    <Suspense fallback={null}>
+    <Suspense fallback={<div>加载中...</div>}>
       <Component />
     </Suspense>
   )
@@ -17,25 +18,22 @@ const lazyLoad = (dynamicImport: () => Promise<{ default: ComponentType<any> }>)
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: '/',
+    element: lazyLoad(() => import('./pages/Login')),
+  },
+  {
+    path: '/wechat',
     element: <App />,
-    children: [
-      {
-        index: true,
-        element: lazyLoad(() => import("./pages/Home")),
-      },
-      {
-        path: "about",
-        element: lazyLoad(() => import("./pages/About")),
-      },
-    ],
+  },
+  {
+    path: '/home',
+    element: lazyLoad(() => import('./pages/Home')),
+  },
+  {
+    path: '/about',
+    element: lazyLoad(() => import('./pages/About')),
   },
 ])
 
-const container = document.getElementById("root")
-if (container) {
-  const root = createRoot(container)
-  root.render(
-    <RouterProvider router={router} />
-  )
-}
+const root = createRoot(document.getElementById('root')!)
+root.render(<RouterProvider router={router} />)
