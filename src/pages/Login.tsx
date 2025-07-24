@@ -1,20 +1,48 @@
+// src/pages/Login.tsx
+import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import useUserStore from '../store/user'
+import styles from './Login.module.scss'
 
-export default function Login() {
-  const login = useUserStore((state) => state.login)
+const Login = () => {
+  const [username, setUsername] = useState('')
+  const [password, setPassword] = useState('')
+  const [error, setError] = useState('')
   const navigate = useNavigate()
 
-  const handleLogin = () => {
-    const fakeUser = { username: '张三', token: 'abc123' }
-    login(fakeUser)
-    navigate('/wechat')
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    if (!username || !password) {
+      setError('用户名和密码不能为空')
+      return
+    }
+    if (username === 'admin' && password === '123456') {
+      navigate('/wechat')
+    } else {
+      setError('用户名或密码错误')
+    }
   }
 
   return (
-    <div>
-      <h2>登录页</h2>
-      <button onClick={handleLogin}>一键登录</button>
+    <div className={styles.container}>
+      <form onSubmit={handleSubmit}>
+        <h2>登录</h2>
+        <input
+          type="text"
+          placeholder="用户名"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+        />
+        <input
+          type="password"
+          placeholder="密码"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        {error && <p className={styles.error}>{error}</p>}
+        <button type="submit">登录</button>
+      </form>
     </div>
   )
 }
+
+export default Login

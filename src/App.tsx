@@ -1,6 +1,8 @@
 // src/App.tsx
 import WeChatLayout from './layout/WeChatLayout'
 
-export default function App() {
+function App() {
   return <WeChatLayout onSelectUser={() => {}} />
 }
+
+export default App
