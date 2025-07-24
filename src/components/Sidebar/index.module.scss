@@ -8,6 +8,31 @@
   box-sizing: border-box;
 }
 
+.userInfoBox {
+  width: 100%;
+  text-align: center;
+  color: white;
+  font-size: 12px;
+  margin-bottom: 8px;
+  padding: 4px 0;
+  box-sizing: border-box;
+}
+
+.username {
+  font-size: 11px;
+  margin-bottom: 4px;
+}
+
+.logoutBtn {
+  font-size: 10px;
+  padding: 2px 6px;
+  border: none;
+  border-radius: 4px;
+  background-color: #444;
+  color: white;
+  cursor: pointer;
+}
+
 .avatar {
   width: 40px;
   height: 40px;
