@@ -1,17 +1,18 @@
-import avatar1 from '../../assets/1.png'
-import avatar2 from '../../assets/2.png'
+// ✅ src/components/ChatMessage/index.tsx
+
 import styles from './index.module.scss'
 
-type ChatMessageProps = {
+export type ChatMessageProps = {
   text: string
   from: 'left' | 'right'
+  avatar: string
 }
 
-const ChatMessage = ({ text, from }: ChatMessageProps) => {
+const ChatMessage = ({ text, from, avatar }: ChatMessageProps) => {
   return (
     <div className={from === 'left' ? styles.chat_left : styles.chat_right}>
       <div className={styles.avatar}>
-        <img src={from === 'left' ? avatar1 : avatar2} alt="头像" />
+        <img src={avatar} alt="头像" />
       </div>
       <div className={from === 'left' ? styles.chat_bubble_left : styles.chat_bubble_right}>
         {text}
@@ -20,4 +21,4 @@ const ChatMessage = ({ text, from }: ChatMessageProps) => {
   )
 }
 
-export default ChatMessage
+export default ChatMessage;

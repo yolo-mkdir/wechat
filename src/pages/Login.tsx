@@ -18,8 +18,8 @@ const Login = () => {
       return
     }
     if (username === 'admin' && password === '123456') {
-      login({ username, token: 'fake-token' }) // ✅ 写入用户状态
-      navigate('/wechat')                      // ✅ 跳转聊天页
+      login({ username, token: 'fake-token' })
+      navigate('/wechat')
     } else {
       setError('用户名或密码错误')
     }

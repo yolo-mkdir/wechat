@@ -1,20 +1,17 @@
-// src/pages/Home.tsx
+// ✅ src/pages/Home.tsx
+
 import { useEffect, useRef } from 'react'
 import ChatWindow from '../components/ChatWindow'
+import type { User } from '../layout/WeChatLayout'
 
-type Message = {
-  text: string
-  from: 'left' | 'right'
-}
-
-export default function Home({ messages }: { messages: Message[] }) {
+export default function Home({ user }: { user: User }) {
   const chatAreaRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     if (chatAreaRef.current) {
       chatAreaRef.current.scrollTop = chatAreaRef.current.scrollHeight
     }
-  }, [messages])
+  }, [user.messages])
 
   return (
     <div
@@ -27,7 +24,7 @@ export default function Home({ messages }: { messages: Message[] }) {
         backgroundColor: '#fff'
       }}
     >
-      <ChatWindow messages={messages} />
+      <ChatWindow messages={user.messages} avatar={user.avatar} />
     </div>
   )
 }

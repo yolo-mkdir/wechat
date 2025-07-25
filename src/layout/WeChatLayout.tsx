@@ -1,7 +1,11 @@
+// ✅ src/layout/WeChatLayout.tsx
+
 import { useState } from 'react'
 import Sidebar from '../components/Sidebar'
 import SideMenu from '../components/SideMenu'
-import avatar from '../assets/1.png'
+import avatar1 from '../assets/1.png'
+import avatar2 from '../assets/2.png'
+import avatar3 from '../assets/3.jpg'
 import styles from './WeChatLayout.module.scss'
 import Home from '../pages/Home'
 
@@ -14,20 +18,45 @@ export type Message = {
   from: 'left' | 'right'
 }
 
-export type WeChatLayoutProps = {
-  onSelectUser: () => void
+export type User = {
+  id: number
+  name: string
+  avatar: string
+  messages: Message[]
 }
 
-export default function WeChatLayout({ onSelectUser }: WeChatLayoutProps) {
-  const [showHome, setShowHome] = useState(true) // ✅ 初始为 true，避免页面空白
-  const [messages, setMessages] = useState<Message[]>([
-    { text: '你好呀', from: 'left' }
+export default function WeChatLayout() {
+  const [currentUserId, setCurrentUserId] = useState<number | null>(null)
+  const [users, setUsers] = useState<User[]>([
+    {
+      id: 1,
+      name: '用户1',
+      avatar: avatar1,
+      messages: [{ text: '你好呀', from: 'left' }]
+    },
+    {
+      id: 2,
+      name: '用户2',
+      avatar: avatar3,
+      messages: [{ text: '去吃饭', from: 'left' }]
+    }
   ])
   const [input, setInput] = useState('')
 
+  const currentUser = users.find((u) => u.id === currentUserId)
+
   const sendMessage = () => {
-    if (!input.trim()) return
-    setMessages([...messages, { text: input, from: 'right' }])
+    if (!input.trim() || currentUserId === null) return
+    const updatedUsers = users.map((user) => {
+      if (user.id === currentUserId) {
+        return {
+          ...user,
+          messages: [...user.messages, { text: input, from: 'right' }]
+        }
+      }
+      return user
+    })
+    setUsers(updatedUsers)
     setInput('')
   }
 
@@ -37,30 +66,30 @@ export default function WeChatLayout({ onSelectUser }: WeChatLayoutProps) {
       <Sidebar />
 
       <div className={styles.chatList}>
-        <div
-          className={styles.userItem}
-          onClick={() => {
-            setShowHome(true)
-            onSelectUser()
-          }}
-        >
-          <img src={avatar} alt="用户头像" className={styles.userAvatar} />
-          <span className={styles.username}>用户1</span>
-        </div>
+        {users.map((user) => (
+          <div
+            key={user.id}
+            className={styles.userItem}
+            onClick={() => setCurrentUserId(user.id)}
+          >
+            <img src={user.avatar} alt="用户头像" className={styles.userAvatar} />
+            <span className={styles.username}>{user.name}</span>
+          </div>
+        ))}
       </div>
 
       <div className={styles.chatArea}>
-        {showHome ? (
+        {currentUser ? (
           <div className={styles.chatWrapper}>
             <div className={styles.chatHeader}>
-              <span className={styles.backBtn} onClick={() => setShowHome(false)}>
+              <span className={styles.backBtn} onClick={() => setCurrentUserId(null)}>
                 &#x276E;
               </span>
-              <span className={styles.chatTitle}>用户1</span>
+              <span className={styles.chatTitle}>{currentUser.name}</span>
               <span className={styles.chatMenu}>...</span>
             </div>
 
-            <Home messages={messages} />
+            <Home user={currentUser} />
 
             <div className={styles.chatInputBar}>
               <img src={voiceIcon} alt="语音" style={{ width: 20, height: 20 }} />
@@ -76,11 +105,7 @@ export default function WeChatLayout({ onSelectUser }: WeChatLayoutProps) {
               <img src={plusIcon} alt="加号" style={{ width: 20, height: 20, marginLeft: 6 }} />
             </div>
           </div>
-        ) : (
-          <div className={styles.emptyHint}>
-            👈 请选择一个联系人开始聊天
-          </div>
-        )}
+        ) : null}
       </div>
     </div>
   )
