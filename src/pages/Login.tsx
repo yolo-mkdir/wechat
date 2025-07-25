@@ -1,6 +1,7 @@
 // src/pages/Login.tsx
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import useUserStore from '../store/user'
 import styles from './Login.module.scss'
 
 const Login = () => {
@@ -8,6 +9,7 @@ const Login = () => {
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
   const navigate = useNavigate()
+  const login = useUserStore((state) => state.login)
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
@@ -16,7 +18,8 @@ const Login = () => {
       return
     }
     if (username === 'admin' && password === '123456') {
-      navigate('/wechat')
+      login({ username, token: 'fake-token' }) // ✅ 写入用户状态
+      navigate('/wechat')                      // ✅ 跳转聊天页
     } else {
       setError('用户名或密码错误')
     }
