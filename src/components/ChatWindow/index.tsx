@@ -1,4 +1,4 @@
-// ✅ src/components/ChatWindow/index.tsx
+// src/components/ChatWindow/index.tsx
 
 import ChatMessage from '../ChatMessage'
 import styles from './index.module.scss'

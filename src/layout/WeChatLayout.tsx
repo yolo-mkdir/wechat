@@ -1,4 +1,4 @@
-// ✅ src/layout/WeChatLayout.tsx
+// src/layout/WeChatLayout.tsx
 
 import { useState } from 'react'
 import Sidebar from '../components/Sidebar'

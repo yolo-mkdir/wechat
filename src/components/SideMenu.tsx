@@ -1,3 +1,4 @@
+// src/SideMenu,tsx
 import styles from './SideMenu.module.scss'
 import avatar from '../assets/2.png'
 import useUserStore from '../store/user'

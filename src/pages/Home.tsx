@@ -1,4 +1,4 @@
-// ✅ src/pages/Home.tsx
+// src/pages/Home.tsx
 
 import { useEffect, useRef } from 'react'
 import ChatWindow from '../components/ChatWindow'
