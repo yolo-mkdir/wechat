@@ -4,7 +4,7 @@ import { useState } from 'react'
 import Sidebar from '../components/Sidebar'
 import SideMenu from '../components/SideMenu'
 import avatar1 from '../assets/1.png'
-import avatar2 from '../assets/2.png'
+// import avatar2 from '../assets/2.png'
 import avatar3 from '../assets/3.jpg'
 import styles from './WeChatLayout.module.scss'
 import Home from '../pages/Home'
@@ -13,11 +13,13 @@ import voiceIcon from '../assets/语音.png'
 import emojiIcon from '../assets/笑脸.png'
 import plusIcon from '../assets/加号.png'
 
+// 消息类型
 export type Message = {
   text: string
   from: 'left' | 'right'
 }
 
+// 用户类型
 export type User = {
   id: number
   name: string
@@ -27,20 +29,22 @@ export type User = {
 
 export default function WeChatLayout() {
   const [currentUserId, setCurrentUserId] = useState<number | null>(null)
+
   const [users, setUsers] = useState<User[]>([
     {
       id: 1,
       name: '用户1',
       avatar: avatar1,
-      messages: [{ text: '你好呀', from: 'left' }]
+      messages: [{ text: '你好呀', from: 'left' as const }]
     },
     {
       id: 2,
       name: '用户2',
       avatar: avatar3,
-      messages: [{ text: '去吃饭', from: 'left' }]
+      messages: [{ text: '去吃饭', from: 'left' as const }]
     }
   ])
+
   const [input, setInput] = useState('')
 
   const currentUser = users.find((u) => u.id === currentUserId)
@@ -51,7 +55,7 @@ export default function WeChatLayout() {
       if (user.id === currentUserId) {
         return {
           ...user,
-          messages: [...user.messages, { text: input, from: 'right' }]
+          messages: [...user.messages, { text: input, from: 'right' as const }]
         }
       }
       return user

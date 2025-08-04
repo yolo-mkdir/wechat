@@ -2,7 +2,7 @@
 import WeChatLayout from './layout/WeChatLayout'
 
 function App() {
-  return <WeChatLayout onSelectUser={() => {}} />
+  return <WeChatLayout />
 }
 
 export default App
