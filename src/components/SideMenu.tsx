@@ -28,8 +28,7 @@ const icons = [
 
 export default function SideMenu() {
   const navigate = useNavigate()
-  const logout = useUserStore((state) => state.logout)
-  const user = useUserStore((state) => state.user)
+  const { user, logout } = useUserStore()
 
   const handleLogout = () => {
     logout()
