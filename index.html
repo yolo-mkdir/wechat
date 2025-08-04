@@ -4,10 +4,24 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
     <title>Vite + React + TS</title>
+
+    <!-- 优化资源加载 -->
+
+    <!-- 1. 提前建立连接（如果你用外部字体/CDN） -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+
+    <!-- 2. 预加载首屏关键图片（假设你有一张 banner.webp） -->
+    <link rel="preload" as="image" href="/src/assets/banner.webp">
+
+    <!-- 3. 可选：预加载字体 -->
+    <!-- <link rel="preload" as="font" href="/src/assets/your-font.woff2" type="font/woff2" crossorigin> -->
+
   </head>
   <body>
     <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
+    <script type="module" src="/src/main.tsx" defer></script>
   </body>
 </html>
